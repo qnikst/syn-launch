@@ -47,7 +47,7 @@ main = execParser opts >>= \syn -> do
     case synType syn of
       Nothing -> error "you must specify synchronization type"
       Just (SynAt s) -> timedLaunch s
-      Just (SynUdp p) -> print p >> waitUdp p
+      Just (SynUdp p) -> waitUdp p
     unless ([] == synCmd syn) (exec . fromList $! (synCmd syn))
   where 
     opts = info (helper <*> synLaunch)
