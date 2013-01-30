@@ -22,5 +22,6 @@ executable syn-launch
                        optparse-applicative ==0.5.*, 
                        time ==1.4.*, 
                        old-locale ==1.0.*, 
-                       system-time-monotonic ==0.2.*
+                       system-time-monotonic ==0.2.*,
+                       network
   ghc-options:         -Wall

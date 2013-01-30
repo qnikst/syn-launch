@@ -14,12 +14,10 @@ import Data.Function
 import System.Locale
 import System.Time.Monotonic
 
-import Execute
-
 -- | launch command at a given time
-timedLaunch :: String -> SynCmd -> IO ()
-timedLaunch t p = parseT supportedFormats t >>= \t' ->
-  currentUTC >>= delay . (on (-) utctDayTime t') >> exec p
+-- TODO: check days boundary
+timedLaunch :: String -> IO ()
+timedLaunch t = parseT supportedFormats t >>= \t' -> currentUTC >>= delay . (on (-) utctDayTime t')
   where currentUTC = getZonedTime >>= \z -> return . zonedTimeToUTC $! z{zonedTimeZone=utc}
 
 parse' :: String -> String -> IO (Either SomeException UTCTime)
@@ -34,5 +32,4 @@ supportedFormats = [ "%R" -- "%H:%M"
                    , "%T" -- "%H:%M:%S"
                    , "%H%M%S"
                    ] 
-
 
