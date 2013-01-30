@@ -1,5 +1,5 @@
 -- | Module: Timed
---   License: BSD-3
+--   License: LGPL-3
 --   Author:  Alexander Vershilov
 --   portability: unportable
 --

@@ -1,3 +1,6 @@
+-- | Module: Executr
+--   Author: Alexander Vershilov
+--   License: LGPL
 module Execute
   ( SynCmd(..)
   , exec

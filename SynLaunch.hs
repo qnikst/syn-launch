@@ -1,9 +1,8 @@
 {-# LANGUAGE Arrows #-}
 -- | Module: Main
 --   Author: Alexander Vershilov <alexander.vershilov@gmail.com>
---   License: BSD-3
---   Copyright:
---
+--   License: LGPL-3
+--   Copyright: ARCCN
 --
 module Main where
 

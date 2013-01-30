@@ -1,3 +1,6 @@
+-- | Module: UdpLaunch
+--   Author: Alexander Vershilov 
+--   License: LGPL
 module UdpLaunch
   where
 

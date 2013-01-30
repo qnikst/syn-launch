@@ -5,7 +5,7 @@ name:                syn-launch
 version:             0.1.0.0
 synopsis:            a small utility to run synchronized program on the many hosts
 -- description:         
-license:             BSD3
+license:             LGPL
 license-file:        LICENSE
 author:              Alexander Vershilov
 maintainer:          alexander.vershilov@gmail.com
