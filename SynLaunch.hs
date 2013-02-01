@@ -7,7 +7,7 @@
 module Main where
 
 import Control.Applicative
-import Control.Monad (unless)
+import Control.Monad (unless, void)
 
 import Options.Applicative
 import Options.Applicative.Arrows
@@ -25,6 +25,7 @@ data SynLaunch = SynLaunch
 
 data SynType = SynUdp Int
              | SynAt  String
+             | SynEnter
              deriving (Show)
 
 
@@ -37,17 +38,19 @@ synLaunch = runA $ proc () -> do
   udp  <- asA (optional $ option (short 'u' 
                                  <> long "udp"
                                  <> metavar "PORT")) -< ()
-
   args <- asA (arguments str idm) -< ()
-  returnA -< SynLaunch args $ (SynAt <$> sat) <|> (SynUdp <$> udp)
+  returnA -< SynLaunch args $   (SynAt <$> sat) 
+                            <|> (SynUdp <$> udp)
+                            <|> (Just SynEnter)
 
 
 main :: IO ()
 main = execParser opts >>= \syn -> do
     case synType syn of
       Nothing -> error "you must specify synchronization type"
-      Just (SynAt s) -> timedLaunch s
+      Just (SynAt s)  -> waitTime s
       Just (SynUdp p) -> waitUdp p
+      Just (SynEnter) -> void getLine 
     unless ([] == synCmd syn) (exec . fromList $! (synCmd syn))
   where 
     opts = info (helper <*> synLaunch)

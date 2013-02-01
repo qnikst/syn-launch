@@ -5,7 +5,7 @@
 --
 -- Provide a simple timed launch like 'at' utility
 module Timed
-  ( timedLaunch )
+  ( waitTime )
   where
 
 import Control.Exception
@@ -16,8 +16,8 @@ import System.Time.Monotonic
 
 -- | launch command at a given time
 -- TODO: check days boundary
-timedLaunch :: String -> IO ()
-timedLaunch t = parseT supportedFormats t >>= \t' -> currentUTC >>= delay . (on (-) utctDayTime t')
+waitTime :: String -> IO ()
+waitTime t = parseT supportedFormats t >>= \t' -> currentUTC >>= delay . (on (-) utctDayTime t')
   where currentUTC = getZonedTime >>= \z -> return . zonedTimeToUTC $! z{zonedTimeZone=utc}
 
 parse' :: String -> String -> IO (Either SomeException UTCTime)
